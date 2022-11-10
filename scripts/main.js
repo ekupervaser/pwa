@@ -2,6 +2,9 @@ function aplicacion(){
 
     const mostrar = document.querySelector('#mostrar');
     const modal = new bootstrap.Modal('#modal',{})
+    const color = document.querySelector('#color');
+    const text = document.querySelector('#text');
+
 
     const seleccionCategorias = document.querySelector('#categorias');
     
@@ -34,6 +37,7 @@ function aplicacion(){
     }
 
     function categoriaSeleccionada(e){
+        mostrar.innerHTML = '<div class="spinner-border" role="status"><span class="visually-hidden">Loading...</span></div>'
         const categoria = e.target.value;
         const url= `https://www.themealdb.com/api/json/v1/1/filter.php?c=${categoria}`;  //segundo endpoint
         fetch(url)
@@ -61,7 +65,7 @@ function aplicacion(){
             const contenidoReceta = document.createElement('div'); //recetaCardbody
             contenidoReceta.classList.add('card-body');
 
-            const tituloReceta = document.createElement('h2');
+            const tituloReceta = document.createElement('h3');
             tituloReceta.classList.add('card-title', 'mb-3');
             tituloReceta.textContent = strMeal ?? plato.nombre;
 
@@ -121,13 +125,13 @@ function aplicacion(){
 
         const favoritos = document.createElement('button');
         favoritos.classList.add('btn','col'); //se le agregan clases de Bootstrap
-        favoritos.textContent = reemplazar(idMeal) ? 'Delete' : 'Save'; //condicional, si ya guardé la receta me da la opción de guardarla
+        favoritos.textContent = reemplazar(idMeal) ? 'Delete' : '♡ Save'; //condicional, si ya guardé la receta me da la opción de guardarla
 
         //Función para que no agregue el mismo id en el localStorage cuando guardo en Favoritos
         favoritos.onclick = function(){
             if(reemplazar(idMeal)){
                 remover(idMeal);
-                favoritos.textContent= 'Save';
+                favoritos.textContent= '♡ Save';
                 return
             }
 
@@ -185,18 +189,28 @@ function aplicacion(){
 
     }
 
+
+    if (navigator.onLine) {
+        console.log('Conectado a Internet');
+        text.innerHTML = "Conectado";
+        color.style.background = "green";
+      } else {
+        console.log('No se detectó conexión a Internet');
+        text.innerHTML = "Desconectado";
+        color.style.background = "red";
+      }
+
+    window.addEventListener('offline', event=>{
+        console.log('Usuario desconectado', event);
+        text.innerHTML = "Desconectado";
+        color.style.background = "red";
+    });
+    
+    window.addEventListener('online', event=>{
+        console.log('Usuario conectado', event);
+        text.innerHTML = "Desconectado";
+        color.style.background = "red";
+    });
 }
 
 document.addEventListener('DOMContentLoaded', aplicacion);
-
-window.addEventListener('offline', event=>{
-    console.log('Usuario desconectado', event);
-});
-
-window.addEventListener('online', event=>{
-    console.log('Usuario conectado', event);
-});
-
-if(!navigator.online){
-    console.log('No hay conexión ni datos en caché');
-}
