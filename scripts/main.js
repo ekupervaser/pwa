@@ -4,6 +4,8 @@ function aplicacion(){
     const modal = new bootstrap.Modal('#modal',{})
     const color = document.querySelector('#color');
     const text = document.querySelector('#text');
+    const main = document.getElementById('main');
+    const game = document.getElementById('game');
 
 
     const seleccionCategorias = document.querySelector('#categorias');
@@ -194,22 +196,31 @@ function aplicacion(){
         console.log('Conectado a Internet');
         text.innerHTML = "Conectado";
         color.style.background = "green";
+        game.style.display = "none";
+        main.style.display = "block";
+
       } else {
         console.log('No se detectó conexión a Internet');
         text.innerHTML = "Desconectado";
         color.style.background = "red";
+        main.style.display = "none";
+        game.style.display = "block";
       }
 
     window.addEventListener('offline', event=>{
         console.log('Usuario desconectado', event);
         text.innerHTML = "Desconectado";
         color.style.background = "red";
+        main.style.display = "none";
+        game.style.display = "block";
     });
     
     window.addEventListener('online', event=>{
         console.log('Usuario conectado', event);
         text.innerHTML = "Desconectado";
         color.style.background = "red";
+        game.style.display = "none";
+        main.style.display = "block";
     });
 }
 

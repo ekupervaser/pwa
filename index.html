@@ -43,8 +43,13 @@
         </nav>
     </header>
 
+    <body>
 
-    <main class="container">
+        <section>
+            <div id="canvas-container"><canvas id="game" width="400" height="400"></div>
+        </section>
+
+    <main id="main" class="container">
         <h2 class="text-center">Search your favorite recipe here!</h2>
         <div class="d-md-flex justify-content-md-center" class="app-header-search">
             <form class="text-center w-50">
@@ -53,8 +58,8 @@
                     <option class="text-center" selected>--Select category--</option>
                 </select>
             </form>
-
         </div>
+
         <div id="mostrar" class="mt-5 row"></div>
         
         <!--Ventana Modal-->
@@ -80,6 +85,7 @@
             <p id="text"></p>
         </div>
     </main>
+</body>
     <footer class="text-center">
         <p>Segundo parcial PWA - Profesor: Gonzalo Rubino - Alumnos: Kupervaser, Ezequiel - Zárate, María</p>
     </footer>
@@ -88,7 +94,8 @@
         </script>
         <script src="scripts/main.js"></script>
         <script src="scripts/registerSW.js"></script>
-        <script type="javascript/worker src="serviceworker.js"></script>
+        <script type="javascript/worker" src="serviceworker.js"></script>
+        <script src="scripts/game.js"></script>
 </body>
 
 </html>
